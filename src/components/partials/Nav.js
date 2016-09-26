@@ -23,6 +23,9 @@ const Nav = ({ location }) => {
             <li className={classNames({'active': location.pathname === '/foo'})}>
               <Link to="/foo">Foo</Link>
             </li>
+            <li className={classNames({'active': location.pathname === '/login'})}>
+              <Link to="/login">Login</Link>
+            </li>
           </ul>
         </div>
       </div>

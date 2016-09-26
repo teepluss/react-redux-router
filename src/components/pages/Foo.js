@@ -4,7 +4,7 @@ import { browserHistory } from 'react-router'
 const Foo = () => (
   <div>
     <h1>Foo</h1>
-    <button onClick={() => browserHistory.push('/')}>Go to HOME</button>
+    <p><small>{'* This page is require login.'}</small></p>
   </div>
 )
 
