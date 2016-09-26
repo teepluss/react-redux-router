@@ -12,8 +12,13 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>Home</h1>
-        <button onClick={() => this.props.changeName()}>{this.props.user.name}</button>
+        <h1>
+          Welcome,
+          { this.props.user.name ?
+            <span>{this.props.user.name}</span> :
+            <span>Guest</span>
+          }
+        </h1>
       </div>
     )
   }
@@ -27,9 +32,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeName: function() {
-      dispatch({ type: 'CHANGE_NAME' })
-    }
   }
 }
 

@@ -1,17 +1,13 @@
-const initialState = {
-  name: 'My name is Tee++'
-}
+const initialState = {}
 
-const user = (state = initialState, action) => {
-  switch (action.type) {
-    case 'CHANGE_NAME':
-      return {
-        ...state,
-        name: 'Something Changed'
-      }
-    default:
-      return state
+const user = (state = initialState, { type, payload }) => {
+  if (type === 'USER_LOGGED_IN') {
+    return payload
   }
+  if (type === 'USER_LOGGED_OUT') {
+    return {}
+  }
+  return state
 }
 
 export default user
