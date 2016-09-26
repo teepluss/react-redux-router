@@ -2,16 +2,16 @@ const initialState = {
   name: 'My name is Tee++'
 }
 
-const me = (state = initialState, action) => {
+const user = (state = initialState, action) => {
   switch (action.type) {
     case 'CHANGE_NAME':
       return {
         ...state,
-        name: 'XXX'
+        name: 'Something Changed'
       }
     default:
       return state
   }
 }
 
-export default me
+export default user

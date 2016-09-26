@@ -13,7 +13,7 @@ const Nav = ({ location }) => {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <a className="navbar-brand" href="#">React + Redux + Router</a>
+          <a className="navbar-brand" href="/">R3 + Auth</a>
         </div>
         <div id="navbar" className="collapse navbar-collapse">
           <ul className="nav navbar-nav">

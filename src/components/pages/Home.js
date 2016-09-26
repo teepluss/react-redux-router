@@ -11,14 +11,17 @@ class Home extends React.Component {
   // }
   render() {
     return (
-      <div onClick={() => this.props.changeName()}>{this.props.me.name}</div>
+      <div>
+        <h1>Home</h1>
+        <button onClick={() => this.props.changeName()}>{this.props.user.name}</button>
+      </div>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    me: state.me
+    user: state.user
   }
 }
 
