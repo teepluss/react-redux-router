@@ -47,7 +47,7 @@ class Login extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <p><input type="text" ref="username" placeholder="Username" /></p>
           <p><input type="password" ref="password" placeholder="Password"/></p>
-          <p><button type="submit">Login</button> | <a onClick={() => browserHistory.push('/')}>Go to HOME</a></p>
+          <p><button type="submit">Login</button> | <a onClick={() => browserHistory.push('/')}>Go to Home</a></p>
         </form>
       </div>
     )
@@ -55,7 +55,7 @@ class Login extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const isAuthenticated = state.user.name || false
+  const isAuthenticated = state.user.isLoggedIn || false
   const redirect = ownProps.location.query.redirect || '/'
   return {
     isAuthenticated,

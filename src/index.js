@@ -31,9 +31,10 @@ const history = syncHistoryWithStore(baseHistory, store)
 
 // Redirects to /login by default
 const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user, // how to get the user state
-  redirectAction: routerActions.replace, // the redux action to dispatch for redirect
-  wrapperDisplayName: 'UserIsAuthenticated' // a nice name for this auth check
+  authSelector: state => state.user,
+  redirectAction: routerActions.replace,
+  wrapperDisplayName: 'UserIsAuthenticated',
+  predicate: user => user.isLoggedIn
 })
 
 ReactDOM.render(
