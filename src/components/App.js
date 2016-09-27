@@ -7,9 +7,7 @@ const App = ({ children, location }) => {
     <div>
       <Nav location={location} />
       <div className="container">
-        <div className="main-container">
-          <div style={{ marginTop: '1.5em' }}>{children}</div>
-        </div>
+        <div style={{ marginTop: '1.5em' }}>{children}</div>
       </div>
     </div>
   )

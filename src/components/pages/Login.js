@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import { login } from '../../actions/user'
+import Formsy from 'formsy-react'
+import MyInput from '../forms/MyInput'
 
 class Login extends React.Component {
 
@@ -12,6 +14,12 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.enableButton = this.enableButton.bind(this)
+    this.disableButton = this.disableButton.bind(this)
+
+    this.state = {
+      canSubmit: false
+    }
   }
 
   componentWillMount() {
@@ -30,25 +38,37 @@ class Login extends React.Component {
     }
   }
 
-  handleSubmit(e) {
-    e.preventDefault()
-    let user = this.refs.username.value
-    let pass = this.refs.password.value
+  enableButton() {
+    this.setState({
+      canSubmit: true
+    })
+  }
 
+  disableButton() {
+    this.setState({
+      canSubmit: false
+    })
+  }
+
+  handleSubmit(data) {
     this.props.doLogin({
-      name: user,
-      pass: pass
+      name: data.username
     })
   }
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <p><input type="text" ref="username" placeholder="Username" /></p>
-          <p><input type="password" ref="password" placeholder="Password"/></p>
-          <p><button type="submit">Login</button> | <a onClick={() => browserHistory.push('/')}>Go to Home</a></p>
-        </form>
+      <div className="row">
+        <div className="col-md-5">
+          <Formsy.Form className="form-horizontal" onValidSubmit={this.handleSubmit} onValid={this.enableButton} onInvalid={this.disableButton}>
+            <MyInput type="text" name="username" title="Email" validations="isEmail" validationError="This is not a valid email" required/>
+            <MyInput type="password" name="password" title="Password" required/>
+            <div className="col-sm-offset-2 col-sm-10">
+              <button type="submit" className="btn btn-default" disabled={!this.state.canSubmit}>Sign in</button> |
+              <a onClick={() => browserHistory.push('/')}>Go to Home</a>
+            </div>
+          </Formsy.Form>
+        </div>
       </div>
     )
   }

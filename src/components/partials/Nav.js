@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import classNames from 'classnames'
+import { connect } from 'react-redux'
+import { logout } from '../../actions/user'
+import _ from 'lodash'
 
-const Nav = ({ location }) => {
+const Nav = ({ user, location, logout, dispatch }) => {
   return (
     <nav className="navbar navbar-inverse navbar-fixed-top">
       <div className="container">
@@ -23,9 +26,14 @@ const Nav = ({ location }) => {
             <li className={classNames({'active': location.pathname === '/foo'})}>
               <Link to="/foo">Foo</Link>
             </li>
-            <li className={classNames({'active': location.pathname === '/login'})}>
-              <Link to="/login">Login</Link>
-            </li>
+            { _.get(user, 'isLoggedIn') ?
+              <li>
+                <a onClick={() => logout()}>Log Out</a>
+              </li>:
+              <li className={classNames({'active': location.pathname === '/login'})}>
+                <Link to="/login">Login</Link>
+              </li>
+            }
           </ul>
         </div>
       </div>
@@ -34,7 +42,26 @@ const Nav = ({ location }) => {
 }
 
 Nav.propTypes = {
+  user: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  logout: PropTypes.func.isRequired
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav)
