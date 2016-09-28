@@ -24,7 +24,13 @@ const Nav = ({ user, location, logout, dispatch }) => {
               <Link to="/">Home</Link>
             </li>
             <li className={classNames({'active': location.pathname === '/foo'})}>
-              <Link to="/foo">Foo</Link>
+              <Link to="/foo">
+                { ! user.isLoggedIn ?
+                  <i className="glyphicon glyphicon-lock"></i>
+                  : ''
+                }
+                Foo
+              </Link>
             </li>
             { _.get(user, 'isLoggedIn') ?
               <li>

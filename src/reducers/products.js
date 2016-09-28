@@ -1,14 +1,7 @@
-const initialState = {
-  name: 'Product X'
-}
+const initialState = []
 
 const products = (state = initialState, action) => {
   switch (action.type) {
-    case 'CHANGE_PRODUCT_NAME':
-      return {
-        ...state,
-        name: action.name
-      }
     default:
       return state
   }
