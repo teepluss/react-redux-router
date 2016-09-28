@@ -26,3 +26,5 @@ cd AwesomeProject
 npm install && npm start
 ```
 
+#### Welcome to my personal fanpage
+https://www.facebook.com/jQueryTips/
