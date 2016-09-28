@@ -7,7 +7,7 @@ import MyInput from '../forms/MyInput'
 
 class Login extends React.Component {
 
-  static proptypes = {
+  static propTypes = {
     'doLogin': PropTypes.func.isRequired
   }
 
