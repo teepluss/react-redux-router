@@ -1,11 +1,19 @@
 import React from 'react'
-//import { browserHistory } from 'react-router'
+import { connect } from 'react-redux'
 
-const Foo = () => (
+const Foo = ({ products }) => (
   <div>
-    <h1>Foo</h1>
+    <h1>Foo {products.name}</h1>
     <p><small>{'* This page is require login.'}</small></p>
   </div>
 )
 
-export default Foo
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(Foo)

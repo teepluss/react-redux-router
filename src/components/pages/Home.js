@@ -10,6 +10,7 @@ class Home extends React.Component {
   //   super(props)
   // }
   render() {
+
     return (
       <div>
         <h1>
@@ -19,6 +20,8 @@ class Home extends React.Component {
             <span>Guest</span>
           }
         </h1>
+        <div>{this.props.products.name}</div>
+        <button onClick={() => this.props.changeName()}>Change Name</button>
       </div>
     )
   }
@@ -26,12 +29,19 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    products: state.products
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    changeName: () => {
+      dispatch({
+        type: 'CHANGE_PRODUCT_NAME',
+        name: 'new name'
+      })
+    }
   }
 }
 
