@@ -1,16 +1,36 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import NavigationBar from './NavigationBar'
+import Navigation from '../components/partials/Navigation'
+import { logout } from '../actions/user'
 
-const App = ({ children, location }) => {
+const App = (props) => {
+  const { children, ...navProps } = props
+
   return (
     <div>
-      <NavigationBar location={location} />
+      <Navigation {...navProps} />
       <div className="container">
-        <div style={{ marginTop: '1.5em' }}>{children}</div>
+        <div style={{ marginTop: '1.5em' }}>{ children }</div>
       </div>
     </div>
   )
 }
 
-export default connect()(App)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
