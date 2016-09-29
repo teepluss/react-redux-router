@@ -1,8 +1,6 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import classNames from 'classnames'
-import { connect } from 'react-redux'
-import { logout } from '../../actions/user'
 import _ from 'lodash'
 
 const Nav = ({ user, location, logout, dispatch }) => {
@@ -53,21 +51,4 @@ Nav.propTypes = {
   logout: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logout: () => {
-      dispatch(logout())
-    }
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Nav)
+export default Nav

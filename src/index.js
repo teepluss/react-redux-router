@@ -1,14 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerMiddleware, routerReducer, routerActions } from 'react-router-redux'
+import { Router, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerMiddleware, routerReducer } from 'react-router-redux'
 import * as reducers from './reducers'
 import thunkMiddleware from 'redux-thunk'
+import devTools from 'remote-redux-devtools'
 import createLogger from 'redux-logger'
-import { UserAuthWrapper } from 'redux-auth-wrapper'
-import { App, Home, Login, Foo } from  './components'
+import routes from './routes'
 import './styles/core.css'
 
 const baseHistory = browserHistory
@@ -23,29 +23,22 @@ const enhance = compose(
     routingMiddleware,
     thunkMiddleware,
     loggerMiddleware
-  )
+  ),
+  devTools()
 )
 
 const store = createStore(rootReducer, enhance)
-const history = syncHistoryWithStore(baseHistory, store)
 
-// Redirects to /login by default
-const UserIsAuthenticated = UserAuthWrapper({
-  authSelector: state => state.user,
-  redirectAction: routerActions.replace,
-  wrapperDisplayName: 'UserIsAuthenticated',
-  predicate: user => user.isLoggedIn
-})
+// Dev Tools
+devTools.updateStore(store);
+
+const history = syncHistoryWithStore(baseHistory, store)
 
 ReactDOM.render(
   <Provider store={store}>
     <div>
       <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Home}/>
-          <Route path="foo" component={UserIsAuthenticated(Foo)}/>
-          <Route path="login" component={Login}/>
-        </Route>
+        {routes}
       </Router>
     </div>
   </Provider>,

@@ -1,16 +1,7 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 
-// const Home = ({ me, changeName }) => (
-//   <div onClick={() => changeName()}>{me.name}</div>
-// )
-
-class Home extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
+class Home extends Component {
   render() {
-
     return (
       <div>
         <h1>
@@ -20,23 +11,10 @@ class Home extends React.Component {
             <span>Guest</span>
           }
         </h1>
+        <p>{this.props.products.name}</p>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default Home

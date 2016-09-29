@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
-import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
-import { login } from '../../actions/user'
 import Formsy from 'formsy-react'
 import MyInput from '../forms/MyInput'
 
@@ -74,24 +72,4 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const isAuthenticated = state.user.isLoggedIn || false
-  const redirect = ownProps.location.query.redirect || '/'
-  return {
-    isAuthenticated,
-    redirect
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    doLogin: (data) => {
-      dispatch(login(data))
-    }
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login)
+export default Login
